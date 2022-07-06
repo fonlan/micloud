@@ -15,7 +15,7 @@ setup(
     url = 'https://github.com/squachen/micloud',
     download_url = 'https://github.com/Squachen/micloud/archive/v_0.5.tar.gz',
     install_requires=[
-        'requests',
+        'requests-cache',
         'tzlocal',
         'click',
         'pycryptodome'

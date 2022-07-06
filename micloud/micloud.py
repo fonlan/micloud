@@ -12,7 +12,7 @@ import hashlib
 import logging
 import time, locale, datetime
 import tzlocal
-import requests
+import requests_cache
 
 from micloud import miutils
 from micloud.micloudexception import MiCloudAccessDenied, MiCloudException
@@ -125,7 +125,7 @@ class MiCloud():
 
     def _init_session(self, reset=False):
         if not self.session or reset:
-            self.session = requests.Session()
+            self.session = requests_cache.CachedSession('micloud_cache')
             self.session.headers.update({'User-Agent': self.useragent})
             self.session.cookies.update({
                 'sdkVersion': '3.8.6',
@@ -288,7 +288,7 @@ class MiCloud():
 
         logging.debug("Send request: %s to %s", params['data'], url)
 
-        self.session = requests.Session()
+        self.session = requests_cache.CachedSession('micloud_cache')
         self.session.headers.update({
             'User-Agent': self.useragent,
             'Accept-Encoding': 'identity',
